@@ -5,6 +5,8 @@ import com.fatec.cadastro_produto.infrastructure.entitys.Produto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/produto")
@@ -20,9 +22,16 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public ResponseEntity<Produto> BuscarUsuarioPorId(@RequestParam Integer id){
+    public ResponseEntity<Produto> BuscarProdutoPorId(@RequestParam Integer id){
         return ResponseEntity.ok(produtoService.buscarProdutoPorId(id));
     }
+
+    @GetMapping("/todos")
+    public ResponseEntity<List<Produto>> buscarTodosProdutos() {
+        return ResponseEntity.ok(produtoService.buscarTodosProdutos());
+    }
+
+
     @DeleteMapping
     public ResponseEntity<Void>deletarProdutoPorId(@RequestParam Integer id){
         produtoService.DeletarProdutoPorId(id);

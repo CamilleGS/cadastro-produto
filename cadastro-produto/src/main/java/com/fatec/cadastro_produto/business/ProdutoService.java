@@ -3,13 +3,16 @@ package com.fatec.cadastro_produto.business;
 import com.fatec.cadastro_produto.infrastructure.entitys.Produto;
 import com.fatec.cadastro_produto.infrastructure.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class ProdutoService {
     private final ProdutoRepository repository;
+    private final ProdutoRepository produtoRepository;
 
-    public ProdutoService(ProdutoRepository repository) {
+    public ProdutoService(ProdutoRepository repository, ProdutoRepository produtoRepository) {
         this.repository = repository;
+        this.produtoRepository = produtoRepository;
     }
 
     //colocar algo dentro put
@@ -19,6 +22,10 @@ public class ProdutoService {
     //get
     public Produto buscarProdutoPorId(Integer id){
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Id nao encontrado"));
+    }
+
+    public List<Produto> buscarTodosProdutos() {
+        return repository.findAll();
     }
 
     public void DeletarProdutoPorId(Integer id){
