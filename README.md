@@ -1,3 +1,5 @@
+`note: There is a English version of this README bellow`
+
 # 🛒 Cadastro de Produtos - API Spring Boot
 
 API REST simples para cadastro de produtos, feita com Spring Boot, JPA e H2.
@@ -20,17 +22,12 @@ API REST simples para cadastro de produtos, feita com Spring Boot, JPA e H2.
 ## ⚠️ Segurança
 Adicione `application.properties` no `.gitignore` para evitar subir dados sensíveis.
 
----
-
-Feito com 💻 por [CamilleGS]
-
-# English 
----
-# Product Registration API
+## English ---------------------------------->
+# 🛒 Product Registration API
 
 A simple Spring Boot application to register, update, list, and delete products.
 
-## Technologies
+## 🚀 Technologies
 - Java 17
 - Spring Boot 3
 - Spring Data JPA
