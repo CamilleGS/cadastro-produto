@@ -23,3 +23,26 @@ Adicione `application.properties` no `.gitignore` para evitar subir dados sensí
 ---
 
 Feito com 💻 por [CamilleGS]
+
+# English 
+---
+# Product Registration API
+
+A simple Spring Boot application to register, update, list, and delete products.
+
+## Technologies
+- Java 17
+- Spring Boot 3
+- Spring Data JPA
+- H2 Database
+
+## 🔗 Endpoints
+
+- `POST /produtos` – Register 
+- `GET /produtos?id=1` – find products  
+- `GET /produtos/todos` – List 
+- `PUT /produtos?id=1` – update by ID  
+- `DELETE /produtos?id=1` – Delete by ID  
+
+## ⚠️ Security
+Add application.properties to .gitignore to prevent uploading sensitive data.
