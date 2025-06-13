@@ -1,4 +1,4 @@
-`note: There is a English version of this README bellow`
+`note: There is a English version of this README below`
 
 # 🛒 Cadastro de Produtos - API Spring Boot
 
