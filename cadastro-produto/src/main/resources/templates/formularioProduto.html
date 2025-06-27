@@ -3,17 +3,278 @@
 <head>
   <meta charset="UTF-8">
   <title>Formulário de Produto</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 25px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      padding: 40px;
+      width: 100%;
+      max-width: 500px;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, #FF6B9D, #C44569, #8B5A96, #667eea);
+    }
+
+    h1 {
+      text-align: center;
+      color: #8B5A96;
+      font-size: 2.2rem;
+      font-weight: 300;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    h1::after {
+      content: '✨';
+      display: block;
+      font-size: 1.5rem;
+      margin-top: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      color: #8B5A96;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    input[type="text"], input[type="number"], input[type="hidden"] {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid #e9ecef;
+      border-radius: 20px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.9);
+      outline: none;
+    }
+
+    input[type="text"]:focus, input[type="number"]:focus {
+      border-color: #8B5A96;
+      box-shadow: 0 0 20px rgba(139, 90, 150, 0.2);
+      transform: translateY(-2px);
+    }
+
+    input[type="text"]:valid, input[type="number"]:valid {
+      border-color: #74b9ff;
+    }
+
+    input[type="text"]:invalid:not(:placeholder-shown),
+    input[type="number"]:invalid:not(:placeholder-shown) {
+      border-color: #fd79a8;
+      animation: shake 0.5s ease-in-out;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    button {
+      flex: 1;
+      background: linear-gradient(135deg, #8B5A96, #667eea);
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 20px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(139, 90, 150, 0.3);
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(139, 90, 150, 0.4);
+    }
+
+    button:active {
+      transform: translateY(-1px);
+    }
+
+    .cancel-btn {
+      background: linear-gradient(135deg, #a29bfe, #6c5ce7) !important;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 25px rgba(162, 155, 254, 0.3);
+    }
+
+    .cancel-btn:hover {
+      box-shadow: 0 12px 35px rgba(162, 155, 254, 0.4);
+    }
+
+    /* Validação visual */
+    .form-group::after {
+      content: '';
+      position: absolute;
+      right: 15px;
+      top: 35px;
+      width: 20px;
+      height: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    input:required:valid ~ .form-group::after,
+    input:required:valid + .form-group::after {
+      content: '✓';
+      color: #74b9ff;
+      opacity: 1;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* Mensagens de validação customizadas */
+    input:invalid:not(:placeholder-shown) + .validation-message {
+      display: block;
+    }
+
+    .validation-message {
+      display: none;
+      background: linear-gradient(135deg, #fd79a8, #e84393);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      margin-top: 5px;
+      box-shadow: 0 3px 10px rgba(253, 121, 168, 0.3);
+    }
+
+    /* Estilos responsivos */
+    @media (max-width: 600px) {
+      .form-container {
+        padding: 30px 20px;
+        margin: 10px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      button, .cancel-btn {
+        width: 100%;
+      }
+    }
+
+    /* Animação de entrada */
+    .form-container {
+      animation: slideIn 0.6s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
-<h1 th:text="${produto.id == null ? 'Novo Produto' : 'Editar Produto'}"></h1>
-<form th:action="@{/ui/produtos/salvar}" th:object="${produto}" method="post">
-  <input type="hidden" th:field="*{id}" />
-  <label for="nome">Nome:</label><br>
-  <input type="text" id="nome" th:field="*{nome}" required/><br><br>
-  <label for="preco">Preço:</label><br>
-  <input type="number" id="preco" th:field="*{preco}" step="0.01" required/><br><br>
-  <button type="submit">Salvar</button>
-  <a href="/ui/produtos">Cancelar</a>
-</form>
+<div class="form-container">
+  <h1 th:text="${produto.id == null ? 'Novo Produto' : 'Editar Produto'}"></h1>
+
+  <form th:action="@{/ui/produtos/salvar}" th:object="${produto}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <div class="form-group">
+      <label for="nome">Nome do Produto</label>
+      <input type="text"
+             id="nome"
+             th:field="*{nome}"
+             required
+             minlength="2"
+             maxlength="50"
+             pattern="[a-zA-ZÀ-ÿ0-9\s]+"
+             title="Nome deve conter apenas letras, números e espaços"/>
+      <div class="validation-message">
+        Nome é obrigatório (2-50 caracteres, apenas letras, números e espaços)
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="preco">Preço (R$)</label>
+      <input type="number"
+             id="preco"
+             th:field="*{preco}"
+             step="0.01"
+             min="0.01"
+             max="99999.99"
+             required
+             title="Preço deve ser maior que zero"/>
+      <div class="validation-message">
+        Preço é obrigatório (mínimo R$ 0,01, máximo R$ 99.999,99)
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button type="submit">💾 Salvar</button>
+      <a href="/ui/produtos" class="cancel-btn">❌ Cancelar</a>
+    </div>
+  </form>
+</div>
 </body>
 </html>
